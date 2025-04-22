@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Pagamentos{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg rounded-4" style="background-color: #ffffff; border: none;">
+        <div class="card-header text-white" style="background-color: #ff69b4;">
+            <h3 class="text-center mb-0">Cadastro de Pagamento</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <label for="cliente" class="form-label">Cliente</label>
+                    <select name="cliente" id="cliente" class="form-select" required>
+                        {% for cliente in clientes %}
+                            <option value="{{ cliente.id }}">{{ cliente.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="servico" class="form-label">Serviço</label>
+                    <select name="servico" id="servico" class="form-select" required>
+                        {% for servico in servicos %}
+                            <option value="{{ servico.id }}">{{ servico.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="funcionario" class="form-label">Funcionário (opcional)</label>
+                    <select name="funcionario" id="funcionario" class="form-select">
+                        <option value="">-- Nenhum --</option>
+                        {% for funcionario in funcionarios %}
+                            <option value="{{ funcionario.id }}">{{ funcionario.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="valor_pago" class="form-label">Valor Pago</label>
+                    <input type="number" class="form-control" step="0.01" name="valor_pago" id="valor_pago" placeholder="R$ 0,00" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="horario" class="form-label">Horário</label>
+                    <input type="time" class="form-control" name="horario" id="horario" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status</label>
+                    <input type="text" class="form-control" name="status" id="status" placeholder="Status do pagamento" required>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-lg text-white" style="background-color: #c77dff;">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,68 @@
+
+{% extends 'base.html' %}
+{% block title %}agendamentos{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg rounded-4" style="background-color: #ffffff; border: none;">
+        <div class="card-header text-white" style="background-color: #ff6f61;">
+            <h3 class="text-center mb-0">Agendamento de Serviço</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <label for="cliente" class="form-label">Cliente</label>
+                    <select name="cliente" id="cliente" class="form-select" required>
+                        {% for cliente in clientes %}
+                            <option value="{{ cliente.id }}">{{ cliente.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="servico" class="form-label">Serviço</label>
+                    <select name="servico" id="servico" class="form-select" required>
+                        {% for servico in servicos %}
+                            <option value="{{ servico.id }}">{{ servico.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="funcionario" class="form-label">Funcionário</label>
+                    <select name="funcionario" id="funcionario" class="form-select" required>
+                        {% for funcionario in funcionarios %}
+                            <option value="{{ funcionario.id }}">{{ funcionario.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="data_agendamento" class="form-label">Data do Agendamento</label>
+                    <input type="date" class="form-control" name="data_agendamento" id="data_agendamento" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="hora_agendamento" class="form-label">Hora do Agendamento</label>
+                    <input type="time" class="form-control" name="hora_agendamento" id="hora_agendamento" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status</label>
+                    <select name="status" id="status" class="form-select" required>
+                        <option value="agendado">Agendado</option>
+                        <option value="concluido">Concluído</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-lg text-white" style="background-color: #ffb74d;">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
